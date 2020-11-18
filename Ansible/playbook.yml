@@ -1,0 +1,5 @@
+---
+- hosts: tag_Name_Docker
+  roles:
+    - docker
+    - ecommerce

@@ -1,0 +1,25 @@
+---
+- name: Cria /data
+  file:
+    path: /data
+    state: directory
+  become: yes
+
+- name: 'Copia Fontes'
+  copy:
+    src: ./files/App
+    dest: /data/
+  become: yes
+
+- name: "Instalando pip Docker"
+  pip:
+    name:
+      - docker-compose
+  become: yes
+
+- name: Create and start services
+  docker_compose:
+    project_src: /data/App/
+    state: present
+  register: output
+  become: yes
